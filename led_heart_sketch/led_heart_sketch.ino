@@ -1,4 +1,4 @@
-//  @autor = s.kulchanovskiy@gmail.com
+//  @author = s.kulchanovskiy@gmail.com
 //  @microcontroller = Atmega328p 
 
 #include <OLED_I2C.h> //импорт библиотеки
@@ -166,8 +166,7 @@ void loop() {
     for(int i=1; i<=3; ++i){
         led_effect_2(50);
     }
-    led_random();
-        
+    led_random();       
     display_message_1(500);
     led_random();
     led_effect_4(50);
