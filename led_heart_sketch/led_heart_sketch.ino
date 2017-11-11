@@ -8,6 +8,9 @@ extern uint8_t nelya[];
 extern uint8_t message[];
 extern uint8_t family[];
 
+#define FLINE1_LED_PIN  2
+#define LLINE1_LED_PIN  13
+
 void display_logo(int pause){
     myOLED.clrScr();
     myOLED.drawBitmap(0, 0, logo, 128, 64);
@@ -29,12 +32,11 @@ void display_message(int pause){
     myOLED.update();
     delay(500);
     myOLED.invert(true);
-    delay(pause); 
+    delay(pause);
     myOLED.clrScr();
     myOLED.drawBitmap(0, 0, message, 128, 64);
     myOLED.update();
     delay(pause);
-    
     myOLED.clrScr();
     myOLED.drawBitmap(0, 0, family, 128, 64);
     myOLED.update();
@@ -43,12 +45,92 @@ void display_message(int pause){
     delay(500);
   }
 
+void led_on(){
+    for (int pin = FLINE1_LED_PIN; pin <= LLINE1_LED_PIN; ++pin){
+      digitalWrite(pin, HIGH);
+    }
+  }
+
+void led_off(){
+    for (int pin = FLINE1_LED_PIN; pin <= LLINE1_LED_PIN; ++pin){
+      digitalWrite(pin, LOW);
+    }
+  }
+  
+void led_effect_1(int pause){
+  for (int pin = FLINE1_LED_PIN; pin <= LLINE1_LED_PIN; ++pin){
+      digitalWrite(pin, HIGH);
+      delay(pause);
+      digitalWrite(pin, LOW);
+    }  
+  }
+
+void led_effect_2(int pause){
+  for (int pin = FLINE1_LED_PIN; pin <= 7; ++pin){
+      digitalWrite(pin, HIGH);
+      digitalWrite(pin+6, HIGH);
+      delay(pause);
+    }
+  for (int pin = FLINE1_LED_PIN; pin <= 7; ++pin){
+      digitalWrite(pin, LOW);
+      digitalWrite(pin+6, LOW);
+      delay(pause);
+    }
+  }
+
+void led_effect_3(int pause){
+  for (int pin = FLINE1_LED_PIN; pin <= LLINE1_LED_PIN; ++pin){
+      digitalWrite(pin, HIGH);
+      delay(pause);
+    }
+  
+  for (int pin = FLINE1_LED_PIN; pin <= LLINE1_LED_PIN; ++pin){
+      digitalWrite(pin, LOW);
+      delay(pause);
+    }
+        
+  }
+
+void led_effect_4(int pause){
+  for (int pin = 7; pin >= FLINE1_LED_PIN; --pin){
+      digitalWrite(pin, HIGH);
+      digitalWrite(pin+6, HIGH);
+      delay(pause);
+    }
+  for (int pin = 7; pin >= FLINE1_LED_PIN; --pin){
+      digitalWrite(pin, LOW);
+      digitalWrite(pin+6, LOW);
+      delay(pause);
+    }  
+  }
+
+
 void setup() {
     myOLED.begin(); //инициализируем дисплей
     myOLED.setBrightness(10); //настраиваем яркость дисплея
+    for (int pin = FLINE1_LED_PIN; pin <= LLINE1_LED_PIN; ++pin){
+        pinMode(pin, OUTPUT);
+      }
+    
   }
 
 void loop() {
-    display_logo(2000);
-    display_message(2000);
+    led_off();
+    for(int i = 1; i<=3; ++i){
+        led_on();
+        delay(500);
+        led_off();
+        delay(500);
+      }   
+    led_effect_1(50);
+    display_logo(1000);
+
+    for(int i=1; i<=3; ++i){
+        led_effect_2(50);
+      }    
+    display_message(1000);
+    led_effect_3(50);
+    for(int i=1; i<=3; ++i){
+        led_effect_4(50);
+      }
   }
