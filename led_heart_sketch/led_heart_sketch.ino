@@ -2,7 +2,7 @@
 //  @microcontroller = Atmega328p 
 
 #include <OLED_I2C.h> //импорт библиотеки
-OLED  myOLED(SDA, SCL, 8); //создаем экземпляр класса OLED с именем myOLED
+OLED  myOLED(SDA, SCL); //создаем экземпляр класса OLED с именем myOLED
 extern uint8_t logo[];
 extern uint8_t nelya[];
 extern uint8_t message[];
