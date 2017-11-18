@@ -1,8 +1,9 @@
 //  @author = s.kulchanovskiy@gmail.com
 //  @microcontroller = Atmega328p 
 
-#include <OLED_I2C.h> //импорт библиотеки
-OLED  myOLED(SDA, SCL); //создаем экземпляр класса OLED с именем myOLED
+#include <OLED_I2C.h> 
+OLED  myOLED(SDA, SCL); 
+
 extern uint8_t logo[];
 extern uint8_t nelya[];
 extern uint8_t message[];
@@ -141,8 +142,8 @@ void led_random(){
 
 void setup() {
     randomSeed(analogRead(0));
-    myOLED.begin(); //инициализируем дисплей
-    myOLED.setBrightness(10); //настраиваем яркость дисплея
+    myOLED.begin(); 
+    myOLED.setBrightness(10); 
     for (int pin = FLINE1_LED_PIN; pin <= LLINE1_LED_PIN+4; ++pin){
         pinMode(pin, OUTPUT);
       }
